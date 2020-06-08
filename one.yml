@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install appache server
+    yum:
+      name: httpd
+      state: latest
+
+  - name: start server
+    service:
+      name: httpd
+      state: started
+
+  - name: Custom page
+    copy:
+      src: /home/centos/ecomm/index.html
+      dest: /var/www/html/index.html 
+
+  - name: Install Tomcat server
+    yum:
+      name: tomcat
+      state: latest
+
+  - name: start server
+    service:
+      name: tomcat
+      state: started	
